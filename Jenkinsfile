@@ -11,7 +11,11 @@ pipeline {
     stage("Build"){
         parallel {
             stage("android"){
-                agent any
+                agent {
+                    docker {
+                        image "reactnativecommunity/react-native-android"
+                    }
+                }
                 stages {
                     stage("android - Checkout") {
                         steps {
