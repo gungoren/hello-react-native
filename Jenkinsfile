@@ -13,17 +13,17 @@ pipeline {
             stage("android"){
                 agent any
                 stages {
-                    stage("CHECKOUT") {
+                    stage("android - Checkout") {
                         steps {
                             checkout scm
                         }
                     }
-                    stage("Build") {
+                    stage("android - Build") {
                         steps {
                             echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
                         }
                     }
-                    stage("Deploy") {
+                    stage("android - Deploy") {
                         when {
                             expression { BRANCH_NAME ==~ "^(main|master|develop)\$" }
                         }
@@ -36,17 +36,17 @@ pipeline {
             stage("ios"){
                 agent any // change this to mac slave
                 stages {
-                    stage("CHECKOUT") {
+                    stage("android - Checkout") {
                         steps {
                             checkout scm
                         }
                     }
-                    stage("Build") {
+                    stage("android - Build") {
                         steps {
                             echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
                         }
                     }
-                    stage("Deploy") {
+                    stage("android - Deploy") {
                         when {
                             expression { BRANCH_NAME ==~ "^(main|master|develop)\$" }
                         }
