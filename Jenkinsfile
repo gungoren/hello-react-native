@@ -18,9 +18,19 @@ pipeline {
                             checkout scm
                         }
                     }
+                    stage("android - Install Dependencies") {
+                        steps {
+                            sh """
+                            rm -rf node_modules/
+                            npm i
+                            """
+                        }
+                    }
                     stage("android - Build") {
                         steps {
-                            echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
+                            dir("android"){
+                                sh "./gradlew assembleDebug"
+                            }
                         }
                     }
                     stage("android - Deploy") {
@@ -28,6 +38,9 @@ pipeline {
                             expression { BRANCH_NAME ==~ "^(main|master|develop)\$" }
                         }
                         steps {
+                            dir("android"){
+                                sh "ls "
+                            }
                             echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
                         }
                     }
