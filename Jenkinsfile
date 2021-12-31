@@ -33,7 +33,7 @@ pipeline {
                     stage("android - Build") {
                         steps {
                             dir("android"){
-                                sh "./gradlew assembleDebug"
+                                sh "./gradlew assembleDebug --build-cache"
                             }
                         }
                     }
@@ -53,17 +53,17 @@ pipeline {
             stage("ios"){
                 agent any // change this to mac slave
                 stages {
-                    stage("android - Checkout") {
+                    stage("ios - Checkout") {
                         steps {
                             checkout scm
                         }
                     }
-                    stage("android - Build") {
+                    stage("ios - Build") {
                         steps {
                             echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
                         }
                     }
-                    stage("android - Deploy") {
+                    stage("ios - Deploy") {
                         when {
                             expression { BRANCH_NAME ==~ "^(main|master|develop)\$" }
                         }
