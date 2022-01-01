@@ -32,6 +32,7 @@ pipeline {
                     }
                     stage("android - Build") {
                         steps {
+                            sh "npm run bundle:android"
                             dir("android"){
                                 sh "./gradlew assembleDebug --build-cache --no-daemon"
                             }
