@@ -49,6 +49,21 @@ pipeline {
                             echo "Hey, look, I'm echoing with a timestamp! ${STAGE_NAME}"
                         }
                     }
+                    /*stage('android - Publish') {
+                        when {
+                            expression { BRANCH_NAME ==~ "^(main|master|develop)\$" }
+                        }
+                        environment {
+                            APPCENTER_API_TOKEN = credentials('at-this-moment-you-should-be-with-us')
+                        }
+                        steps {
+                            appCenter apiToken: APPCENTER_API_TOKEN,
+                                    ownerName: 'janes-addiction',
+                                    appName: 'ritual-de-lo-habitual',
+                                    pathToApp: 'three/days/xiola.apk',
+                                    distributionGroups: 'casey, niccoli'
+                        }
+                    }*/
                 }
             }
             stage("ios"){
